@@ -1,0 +1,62 @@
+{
+  "..\\node_modules\\@nextui-org\\accordion\\dist\\chunk-3XWHXVUH.mjs -> @nextui-org/dom-animation": {
+    "id": 2058,
+    "files": []
+  },
+  "..\\node_modules\\@nextui-org\\calendar\\dist\\chunk-IXIWB64E.mjs -> @nextui-org/dom-animation": {
+    "id": 2058,
+    "files": []
+  },
+  "..\\node_modules\\@nextui-org\\modal\\dist\\chunk-RE5G2YMK.mjs -> @nextui-org/dom-animation": {
+    "id": 2058,
+    "files": []
+  },
+  "..\\node_modules\\@nextui-org\\navbar\\dist\\chunk-O74VCX62.mjs -> @nextui-org/dom-animation": {
+    "id": 2058,
+    "files": []
+  },
+  "..\\node_modules\\@nextui-org\\navbar\\dist\\chunk-XA766R6X.mjs -> @nextui-org/dom-animation": {
+    "id": 2058,
+    "files": []
+  },
+  "..\\node_modules\\@nextui-org\\popover\\dist\\chunk-5KWE7IBM.mjs -> @nextui-org/dom-animation": {
+    "id": 2058,
+    "files": []
+  },
+  "..\\node_modules\\@nextui-org\\popover\\dist\\chunk-ELWWYGWQ.mjs -> @nextui-org/dom-animation": {
+    "id": 2058,
+    "files": []
+  },
+  "..\\node_modules\\@nextui-org\\ripple\\dist\\chunk-MRKSP4U5.mjs -> @nextui-org/dom-animation": {
+    "id": 2058,
+    "files": [
+      "static/chunks/58.9c398a4b1b720466.js"
+    ]
+  },
+  "..\\node_modules\\@nextui-org\\tooltip\\dist\\chunk-LY4WDGUU.mjs -> @nextui-org/dom-animation": {
+    "id": 2058,
+    "files": []
+  },
+  "..\\node_modules\\@supabase\\auth-js\\dist\\module\\lib\\helpers.js -> @supabase/node-fetch": {
+    "id": 9895,
+    "files": []
+  },
+  "..\\node_modules\\@supabase\\functions-js\\dist\\module\\helper.js -> @supabase/node-fetch": {
+    "id": 9895,
+    "files": []
+  },
+  "..\\node_modules\\@supabase\\realtime-js\\dist\\module\\RealtimeClient.js -> @supabase/node-fetch": {
+    "id": 9895,
+    "files": []
+  },
+  "..\\node_modules\\@supabase\\realtime-js\\dist\\module\\RealtimeClient.js -> ws": {
+    "id": 6735,
+    "files": [
+      "static/chunks/735.6e9c7e96f28c50e2.js"
+    ]
+  },
+  "..\\node_modules\\@supabase\\storage-js\\dist\\module\\lib\\helpers.js -> @supabase/node-fetch": {
+    "id": 9895,
+    "files": []
+  }
+}

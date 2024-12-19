@@ -1,10 +1,10 @@
 "use client";
 
-import type { Metadata } from "next";
+
 import * as React from "react";
 import localFont from "next/font/local";
 import "./globals.css";
-import { NextUIProvider } from "@nextui-org/react";
+
 import Provider from './Provider';
 
 const geistSans = localFont({
