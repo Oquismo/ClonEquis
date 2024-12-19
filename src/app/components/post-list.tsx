@@ -3,7 +3,7 @@
 import PostCard from "./post-card"
 
 
-export function PostList ({ posts }: { posts: Posts[] }){
+export function PostList ({ posts }: { posts: post[] }){
     return(
         <>
         {
