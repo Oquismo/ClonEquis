@@ -2,7 +2,7 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { AuthButtonServer } from "@/app/components/auth-button-server";
 import { redirect } from "next/navigation";
-import PostCard from "./components/post-card";
+// import PostCard from "./components/post-card";
 import { PostList } from "./components/post-list";
 
 
