@@ -4,14 +4,14 @@ import { cookies } from "next/headers";
 // import { revalidatePath } from "next/cache";
 export function ComposePost ({
     
-    userAvatarUrl
+    avatar_url
 }: {
     
-    userAvatarUrl: string;
+    avatar_url: string;
 }){
     return(
         <form className=" flex flex-1 flex-col gap-y-4">
-              <img className="rounded-full w-6 h-6 object-contain" src={userAvatarUrl} />
+              <img className="rounded-full w-6 h-6 object-contain" src={avatar_url} />
             <div className="flex flex-1 flex-col gap-y-4">
 
             <textarea
