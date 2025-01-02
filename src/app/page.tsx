@@ -25,7 +25,7 @@ export default async function Home() {
     <main className="flex min-h-screen flex-col items-center justify-between ">
       <section className="max-w-[600px] mx-auto border-l border-r border-white/30 h-full min-h-screen">
         
-        <ComposePost avatar_url={session.user.user_metadata.avatar_url} />
+        <ComposePost userAvatarUrl={session.user?.user_metadata?.avatar_url} />
         <PostList posts={posts ?? []} />
       </section>
       <AuthButtonServer />
