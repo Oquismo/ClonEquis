@@ -1,6 +1,6 @@
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-import { Avatar } from '@nextui-org/react'
+
 // import { revalidatePath } from "next/cache";
 export function ComposePost ({
     
