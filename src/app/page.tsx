@@ -4,6 +4,7 @@ import { AuthButtonServer } from "@/app/components/auth-button-server";
 import { redirect } from "next/navigation";
 
 import { PostList } from "./components/post-list";
+import { ComposePost } from "./components/compose-post";
 
 
 export default async function Home() {
@@ -23,9 +24,11 @@ export default async function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between ">
       <section className="max-w-[600px] mx-auto border-l border-r border-white/30 h-full min-h-screen">
-        <AuthButtonServer />
+        
+        <ComposePost userAvatarUrl={session.user.user_metadata.avatar_url} />
         <PostList posts={posts ?? []} />
       </section>
+      <AuthButtonServer />
       <main className="mt-4 items-center justify-between">
       </main>
     </main>
