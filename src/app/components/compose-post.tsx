@@ -11,7 +11,7 @@ export function ComposePost ({
 }){
     return(
         <form className=" flex flex-1 flex-col gap-y-4">
-              <Avatar  size="md" src={userAvatarUrl} />
+              <img className="rounded-full w-6 h-6 object-contain" src={userAvatarUrl} />
             <div className="flex flex-1 flex-col gap-y-4">
 
             <textarea
