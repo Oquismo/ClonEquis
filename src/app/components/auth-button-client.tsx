@@ -18,7 +18,7 @@ export function AuthButton({ session }: { session: Session | null }) {
       provider: "github",
       options: {
           redirectTo: "https://clon-equis.vercel.app/auth/callback", // URL de redirección después del inicio de sesión en producción
-          // redirectTo: "http://localhost:3000/login", // URL de redirección después del inicio de sesión en producción
+        
       },
     });
   };
