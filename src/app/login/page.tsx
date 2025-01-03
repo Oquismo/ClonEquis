@@ -1,5 +1,5 @@
 import { AuthButtonServer } from "@/app/components/auth-button-server";
-import { ComposePost } from "../components/compose-post";
+
 
 export default function Login (){
     return (
