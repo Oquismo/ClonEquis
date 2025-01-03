@@ -1,1 +1,8 @@
 node_modules
+# Ignorar la carpeta .next
+.next
+
+# Otras carpetas y archivos que deseas ignorar
+node_modules
+.env
+dist
