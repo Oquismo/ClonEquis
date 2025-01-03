@@ -6,6 +6,7 @@ import { IconMessageCircle } from '@tabler/icons-react';
 import { IconRepeat } from '@tabler/icons-react';
 import { IconHeartPlus } from '@tabler/icons-react';
 
+
 export default function PostCard({
     userName,
     avatar_url,

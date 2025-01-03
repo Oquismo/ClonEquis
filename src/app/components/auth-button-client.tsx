@@ -3,6 +3,7 @@
 import React from 'react';
 import { type Session, createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
+import { IconBrandGithub, IconBrandGoogle } from '@tabler/icons-react';
 
 // Componente AuthButton que recibe una sesión como prop
 export function AuthButton({ session }: { session: Session | null }) {
@@ -12,13 +13,12 @@ export function AuthButton({ session }: { session: Session | null }) {
   // Hook de Next.js para la navegación
   const router = useRouter();
 
-  // Función para manejar el inicio de sesión con OAuth (GitHub)
-  const handleSignIn = async () => {
+  // Función para manejar el inicio de sesión con OAuth
+  const handleSignIn = async (provider: 'github' | 'google') => {
     await supabase.auth.signInWithOAuth({
-      provider: "github",
+      provider,
       options: {
-          redirectTo: "https://clon-equis.vercel.app/auth/callback", // URL de redirección después del inicio de sesión en producción
-        
+        redirectTo: "https://clon-equis.vercel.app/", // URL de redirección después del inicio de sesión en producción
       },
     });
   };
@@ -33,16 +33,33 @@ export function AuthButton({ session }: { session: Session | null }) {
   return (
     <header className="flex flex-col items-center">
       {
-        // Si no hay sesión, muestra el botón de iniciar sesión
-        session === null ? (
-          <button onClick={handleSignIn}
-            type="button"
-            className="mt-11 text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 me-2 mb-2"
-          > Iniciar sesión con GitHub
+        // Si no hay sesión, muestra los botones de iniciar sesión
+        !session ? (
+          <div className="flex flex-col gap-4">
+            <button
+              onClick={() => handleSignIn('github')}
+              className="flex items-center gap-2 bg-gray-800 text-white px-4 py-2 rounded"
+            >
+              <IconBrandGithub />
+              Iniciar sesión con GitHub
+            </button>
+            <button
+              onClick={() => handleSignIn('google')}
+              className="flex items-center gap-2 bg-red-600 text-white px-4 py-2 rounded"
+            >
+              <IconBrandGoogle />
+              Iniciar sesión con Google
+            </button>
+          </div>
+        ) : (
+          // Si hay sesión, muestra el botón de cerrar sesión
+          <button
+            onClick={handleSignOut}
+            className="bg-gray-800 text-white px-4 py-2 rounded"
+          >
+            Cerrar sesión
           </button>
         )
-        // Si hay sesión, muestra el botón de cerrar sesión
-        : <button onClick={handleSignOut} className="mt-18 text-center">Cerrar Sesión</button>
       }
     </header>
   );
