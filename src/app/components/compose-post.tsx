@@ -9,8 +9,12 @@ export function ComposePost ({
     
     userAvatarUrl: string;
 }){
+    const addPost = async (formData: FormData) => {
+        console.log('hola capullo')
+
+    }
     return(
-        <form className=" flex flex-1 flex-col gap-y-4">
+        <form action={addPost} className=" flex flex-1 flex-col gap-y-4">
               <img className="rounded-full w-12 h-12 object-contain" src={userAvatarUrl} />
             <div className="flex flex-1 flex-col gap-y-4">
 
@@ -20,7 +24,7 @@ export function ComposePost ({
             className="w-full textt-2xl bg-black placeholder-gray-500"
             placeholder="Que dices primo"
             ></textarea>
-            <button className="bg-sky-300 font-bold rounded-full px-5 py-2 self-end"
+            <button type="submit" className="bg-sky-300 font-bold rounded-full px-5 py-2 self-end"
             >Publicar tuit
             </button>
             </div>
