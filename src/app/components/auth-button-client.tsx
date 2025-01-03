@@ -32,7 +32,7 @@ export function AuthButton({ session }: { session: Session | null }) {
   // Redirigir al usuario a la página de posts si está autenticado
   useEffect(() => {
     if (session) {
-      router.push('/posts'); // Asegúrate de que esta ruta sea la correcta para mostrar los posts
+      router.push('/'); // Asegúrate de que esta ruta sea la correcta para mostrar los posts
     }
   }, [session, router]);
 
