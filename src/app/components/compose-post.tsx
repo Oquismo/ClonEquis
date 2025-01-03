@@ -10,6 +10,7 @@ export function ComposePost ({
     userAvatarUrl: string;
 }){
     const addPost = async (formData: FormData) => {
+        'use server'
         console.log('hola capullo')
 
     }
