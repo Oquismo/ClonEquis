@@ -42,7 +42,7 @@ export function AuthButton({ session }: { session: Session | null }) {
           </button>
         )
         // Si hay sesión, muestra el botón de cerrar sesión
-        : <button onClick={handleSignOut} className="mt-18 text-center">Cerrar Seffsión</button>
+        : <button onClick={handleSignOut} className="mt-18 text-center">Cerrar Sesión</button>
       }
     </header>
   );
