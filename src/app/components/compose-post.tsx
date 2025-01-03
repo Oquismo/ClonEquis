@@ -1,5 +1,7 @@
-// import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
-// import { cookies } from "next/headers";
+
+import { cookies } from "next/headers";
+
+import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 
 // import { revalidatePath } from "next/cache";
 export function ComposePost ({
@@ -11,7 +13,19 @@ export function ComposePost ({
 }){
     const addPost = async (formData: FormData) => {
         'use server'
-        console.log('hola capullo')
+        const content = formData.get('content') 
+
+        if (content === null) return
+
+        const supabase = createServerActionClient ({cookies})
+
+        const { data: {user} } = await supabase.auth.getUser()
+
+        if (user === null) return
+
+        await supabase.from('posts').insert({content, user_id: user.id})
+           
+        
 
     }
     return(
@@ -20,7 +34,7 @@ export function ComposePost ({
             <div className="flex flex-1 flex-col gap-y-4">
 
             <textarea
-            name='post'
+            name='content'
             rows={4}
             className="w-full textt-2xl bg-black placeholder-gray-500"
             placeholder="Que dices primo"
