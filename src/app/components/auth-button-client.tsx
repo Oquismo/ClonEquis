@@ -17,8 +17,8 @@ export function AuthButton({ session }: { session: Session | null }) {
     await supabase.auth.signInWithOAuth({
       provider: "github",
       options: {
-          redirectTo: "https://clon-equis.vercel.app/auth/callback", // URL de redirección después del inicio de sesión en producción
-          // redirectTo: "http://localhost:3000", // URL de redirección después del inicio de sesión en producción
+          // redirectTo: "https://clon-equis.vercel.app/auth/callback", // URL de redirección después del inicio de sesión en producción
+          redirectTo: "http://localhost:3000/login", // URL de redirección después del inicio de sesión en producción
       },
     });
   };
@@ -42,7 +42,7 @@ export function AuthButton({ session }: { session: Session | null }) {
           </button>
         )
         // Si hay sesión, muestra el botón de cerrar sesión
-        : <button onClick={handleSignOut} className="mt-18 text-center">Cerrar Sesión</button>
+        : <button onClick={handleSignOut} className="mt-18 text-center">Cerrar Sesiónnn</button>
       }
     </header>
   );

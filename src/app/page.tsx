@@ -2,7 +2,6 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { AuthButtonServer } from "@/app/components/auth-button-server";
 import { redirect } from "next/navigation";
-
 import { PostList } from "./components/post-list";
 import { ComposePost } from "./components/compose-post";
 
