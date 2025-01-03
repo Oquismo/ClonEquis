@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { type Session, createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import { IconBrandGithub, IconBrandGoogle } from '@tabler/icons-react';
@@ -28,6 +28,13 @@ export function AuthButton({ session }: { session: Session | null }) {
     await supabase.auth.signOut();
     router.push('/'); // Redirecciona al home después de cerrar sesión
   };
+
+  // Redirigir al usuario a la página de posts si está autenticado
+  useEffect(() => {
+    if (session) {
+      router.push('/posts'); // Asegúrate de que esta ruta sea la correcta para mostrar los posts
+    }
+  }, [session, router]);
 
   // Renderiza el componente
   return (
