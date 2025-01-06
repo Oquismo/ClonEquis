@@ -7,9 +7,8 @@ export function ComposePost ({
 }: {
     userAvatarUrl: string;
 }){
-    const addPost = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        const formData = new FormData(event.currentTarget);
+    const addPost = async (formData: FormData) => {
+        'use server';
         const content = formData.get('content');
 
         if (content === null) return;
@@ -24,7 +23,7 @@ export function ComposePost ({
     };
 
     return (
-        <form onSubmit={addPost} className="flex flex-1 flex-col gap-y-4">
+        <form action={addPost} className="flex flex-1 flex-col gap-y-4">
             <img className="rounded-full w-12 h-12 object-contain" src={userAvatarUrl} />
             <div className="flex flex-1 flex-col gap-y-4">
                 <textarea
