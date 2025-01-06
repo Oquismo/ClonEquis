@@ -33,7 +33,7 @@ export function ComposePost ({
                     placeholder="Que dices primo"
                 ></textarea>
                 <button type="submit" className="bg-sky-300 font-bold rounded-full px-5 py-2 self-end">
-                    Publicar tuit
+                    Publicar
                 </button>
             </div>
         </form>
