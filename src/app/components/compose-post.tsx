@@ -24,8 +24,9 @@ export function ComposePost ({
 
     return (
         <form action={addPost} className="flex flex-1 flex-col gap-y-4">
-            <img className="rounded-full w-12 h-12 object-contain" src={userAvatarUrl} />
+            
             <div className="flex flex-1 flex-col gap-y-4">
+            <img className="rounded-full w-12 h-12 object-contain" src={userAvatarUrl} />
                 <textarea
                     name='content'
                     rows={4}
