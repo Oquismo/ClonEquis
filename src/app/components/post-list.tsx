@@ -11,6 +11,7 @@ type Post = {
   id: string;
   user: User;
   content: string;
+  created_at: string; // Añadir el campo de fecha de publicación
 };
 
 export function PostList ({ posts }: { posts: Post[] }) {
@@ -22,6 +23,7 @@ export function PostList ({ posts }: { posts: Post[] }) {
               id,
               user,
               content,
+              created_at, // Obtener la fecha de publicación
             } = post;
             const {
               user_name: userName,
@@ -34,7 +36,8 @@ export function PostList ({ posts }: { posts: Post[] }) {
                 key={id} 
                 userName={userName} 
                 userFullName={userFullName} 
-                avatar_url={avatarUrl}
+                avatarUrl={avatarUrl}
+                createdAt={created_at} // Pasar la fecha de publicación a PostCard
               />
             );
           })
