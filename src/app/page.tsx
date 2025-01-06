@@ -21,8 +21,8 @@ export default async function Home() {
   .select("*, user:users(name, avatar_url, user_name)");
 
   return (
-    <main className=" ">
-      <section className="">
+    <main className="flex min-h-screen flex-col items-center justify-between ">
+      <section className="max-w-[600px]  border-l border-r border-white/30 h-full min-h-screen">
         
         <ComposePost userAvatarUrl={session.user?.user_metadata?.avatar_url} />
         <PostList posts={posts ?? []} />
