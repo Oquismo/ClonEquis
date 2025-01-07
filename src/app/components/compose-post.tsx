@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 export function ComposePost ({
     userAvatarUrl
@@ -39,4 +39,20 @@ export function ComposePost ({
             </div>
         </form>
     );
+}
+
+function PostList({ posts }) {
+  const [postList, setPostList] = useState(posts);
+
+  useEffect(() => {
+    setPostList(posts);
+  }, [posts]);
+
+  return (
+    <div>
+      {postList.map(post => (
+        <div key={post.id}>{post.title}</div>
+      ))}
+    </div>
+  );
 }
