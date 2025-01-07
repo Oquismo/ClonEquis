@@ -1,81 +1,73 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { type Session, createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
-import { IconBrandGithub } from '@tabler/icons-react';
+import { IconBrandGithub, IconBrandGoogle } from '@tabler/icons-react';
 
-type Post = {
-  id: string;
-  title: string;
-  // Agrega otros campos según sea necesario
-};
-
-function PostList({ posts }: { posts: Post[] }) {
-  const [postList, setPostList] = useState<Post[]>(posts);
-
-  const fetchData = async () => {
-    try {
-      const response = await fetch('/api/data', {
-        credentials: 'same-origin',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      const data: Post[] = await response.json();
-      setPostList(data);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  return (
-    <div>
-      {postList.map((post) => (
-        <div key={post.id}>{post.title}</div>
-      ))}
-    </div>
-  );
-}
-
+// Componente AuthButton que recibe una sesión como prop
 export function AuthButton({ session }: { session: Session | null }) {
+
+  // Crea una instancia del cliente de Supabase
   const supabase = createClientComponentClient({});
+  // Hook de Next.js para la navegación
   const router = useRouter();
 
+  // Función para manejar el inicio de sesión con OAuth
   const handleSignIn = async (provider: 'github' | 'google') => {
     await supabase.auth.signInWithOAuth({
       provider,
       options: {
-        redirectTo: "https://clon-equis.vercel.app/auth/callback",
+        redirectTo: "https://clon-equis.vercel.app/auth/callback", // URL de redirección después del inicio de sesión en producción
       },
     });
   };
 
+  // Función para manejar el cierre de sesión
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     router.push('/'); // Redirecciona al home después de cerrar sesión
   };
 
+  // Redirigir al usuario a la página de posts si está autenticado
   useEffect(() => {
     if (session) {
       router.push('/'); // Asegúrate de que esta ruta sea la correcta para mostrar los posts
     }
   }, [session, router]);
 
+  // Renderiza el componente
   return (
-    <div>
-      {session ? (
-        <button onClick={handleSignOut}>Sign Out</button>
-      ) : (
-        <button onClick={() => handleSignIn('github')}>
-          <IconBrandGithub />
-          Sign In with GitHub
-        </button>
-      )}
-    </div>
+    <header className="flex flex-col items-center">
+      {
+        // Si no hay sesión, muestra los botones de iniciar sesión
+        !session ? (
+          <div className="flex flex-col gap-4">
+            <button
+              onClick={() => handleSignIn('github')}
+              className="flex items-center gap-2 bg-gray-800 text-white px-4 py-2 rounded"
+            >
+              <IconBrandGithub />
+              Iniciar sesión con GitHub
+            </button>
+            <button
+              onClick={() => handleSignIn('google')}
+              className="flex items-center gap-2 bg-red-600 text-white px-4 py-2 rounded"
+            >
+              <IconBrandGoogle />
+              Iniciar sesión con Google
+            </button>
+          </div>
+        ) : (
+          // Si hay sesión, muestra el botón de cerrar sesión
+          <button
+            onClick={handleSignOut}
+            className="bg-gray-800 text-white px-4 py-2 rounded"
+          >
+            Cerrar sesión
+          </button>
+        )
+      }
+    </header>
   );
 }
