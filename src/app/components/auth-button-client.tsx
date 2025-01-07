@@ -3,8 +3,8 @@
 import React, { useEffect } from 'react';
 import { type Session, createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
-import { IconBrandGithub, IconBrandGoogle } from '@tabler/icons-react';
-
+import { IconBrandGithub } from '@tabler/icons-react';
+// IconBrandGoogle
 // Componente AuthButton que recibe una sesión como prop
 export function AuthButton({ session }: { session: Session | null }) {
 
