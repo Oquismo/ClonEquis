@@ -50,13 +50,13 @@ export function AuthButton({ session }: { session: Session | null }) {
               <IconBrandGithub />
               Iniciar sesión con GitHub
             </button>
-            <button
+            {/* <button
               onClick={() => handleSignIn('google')}
               className="flex items-center gap-2 bg-red-600 text-white px-4 py-2 rounded"
             >
               <IconBrandGoogle />
               Iniciar sesión con Google
-            </button>
+            </button> */}
           </div>
         ) : (
           // Si hay sesión, muestra el botón de cerrar sesión
