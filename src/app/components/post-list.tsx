@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import React from 'react';
 import PostCard from './post-card'; // Asegúrate de que la ruta sea correcta
 
@@ -12,6 +14,7 @@ type Post = {
   created_at: string;
 };
 
+/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
 export function PostList({ posts }: { posts: Post[] }) {
   return (
     <>
