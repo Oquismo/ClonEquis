@@ -26,9 +26,9 @@ export default async function Home() {
         
         <ComposePost userAvatarUrl={session.user?.user_metadata?.avatar_url} />
         <PostList posts={posts ?? []} />
-        <AuthButtonServer />
+        
       </section>
-      
+      <AuthButtonServer />
       <main className="mt-4 items-center justify-between">
       </main>
     </main>
