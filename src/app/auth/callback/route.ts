@@ -1,25 +1,19 @@
-import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
-import { type NextRequest, NextResponse } from "next/server";
+import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs'
+import { cookies } from 'next/headers'
+import { type NextRequest, NextResponse } from 'next/server'
 
-export const dynamic = 'force-dynamic';
-export async function GET(request: NextRequest) {
-  const requestUrl = new URL(request.url);
-  const code = requestUrl.searchParams.get('code');
+// esto es una opción de Next.js, para evitar que cachee de forma
+// estática la ruta, y que siempre se ejecute en el servidor
+export const dynamic = 'force-dynamic'
 
-  if (code) {
-    try {
-      const supabase = createRouteHandlerClient({ cookies })
-      await supabase.auth.exchangeCodeForSession(code)
-    } catch (error) {
-      console.error("Error al intercambiar el code:", error)
-      return NextResponse.redirect(requestUrl.origin + '/error')
-    }
+export async function GET (request: NextRequest) {
+  const requestUrl = new URL(request.url)
+  const code = requestUrl.searchParams.get('code')
+
+  if (code !== null) {
+    const supabase = createRouteHandlerClient({ cookies })
+    await supabase.auth.exchangeCodeForSession(code)
   }
 
-  return NextResponse.redirect(requestUrl.origin + '/login', {
-    headers: {
-      'Cache-Control': 'public, max-age=3600', // Cache por 1 hora
-    },
-  }); // Redirige al usuario a la página de inicio de sesión
+  return NextResponse.redirect(requestUrl.origin)
 }
