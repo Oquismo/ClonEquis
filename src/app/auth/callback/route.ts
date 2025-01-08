@@ -8,8 +8,13 @@ export async function GET(request: NextRequest) {
   const code = requestUrl.searchParams.get('code');
 
   if (code) {
-    const supabase = createRouteHandlerClient({ cookies });
-    await supabase.auth.exchangeCodeForSession(code);
+    try {
+      const supabase = createRouteHandlerClient({ cookies })
+      await supabase.auth.exchangeCodeForSession(code)
+    } catch (error) {
+      console.error("Error al intercambiar el code:", error)
+      return NextResponse.redirect(requestUrl.origin + '/error')
+    }
   }
 
   return NextResponse.redirect(requestUrl.origin + '/login'); // Redirige al usuario a la página de inicio de sesión
