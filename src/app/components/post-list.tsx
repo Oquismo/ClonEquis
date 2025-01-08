@@ -21,26 +21,27 @@ export function PostList({ posts }: { posts: Post[] }) {
   const [fetchedPosts, setFetchedPosts] = useState<Post[]>(posts);
 
   useEffect(() => {
-    if (!requestMade) {
-      const fetchPosts = async () => {
-        try {
-          const response = await fetch("https://clon-equis.vercel.app/api/posts", {
-            method: "GET",
-            headers: {
-              accept: "application/json",
-            },
-          });
-          const data = await response.json();
-          setFetchedPosts(data.posts);
-          setRequestMade(true); // Marca que la solicitud ya se ha realizado
-        } catch (error) {
-          console.error("Error fetching posts:", error);
-        }
-      };
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch("https://clon-equis.vercel.app/api/posts", {
+          method: "GET",
+          headers: {
+            accept: "application/json",
+          },
+        });
+        const data = await response.json();
+        setFetchedPosts(data.posts);
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      }
+    };
 
-      fetchPosts();
+    // Hacer fetch solo cuando sea necesario
+    if (!requestMade) {
+      fetchPosts(); // tu función de fetch
+      setRequestMade(true);
     }
-  }, [requestMade]);
+  }, []); // Evita re-llamadas
 
   return (
     <>
