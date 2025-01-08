@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from 'react';
+// import React, { useEffect } from 'react';
 import { type Session, createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import { IconBrandGithub, IconBrandGoogle } from '@tabler/icons-react';
@@ -16,7 +16,7 @@ export function AuthButton({ session }: { session: Session | null }) {
   // Función para manejar el inicio de sesión con OAuth
   const handleSignIn = async (provider: 'github' | 'google') => {
     await supabase.auth.signInWithOAuth({
-      provider,
+      provider: 'github',
       options: {
         redirectTo: "https://clon-equis.vercel.app/auth/callback", // URL de redirección después del inicio de sesión en producción
       },
@@ -29,12 +29,12 @@ export function AuthButton({ session }: { session: Session | null }) {
     router.push('/'); // Redirecciona al home después de cerrar sesión
   };
 
-  // Redirigir al usuario a la página de posts si está autenticado
-  useEffect(() => {
-    if (session) {
-      router.push('/'); // Asegúrate de que esta ruta sea la correcta para mostrar los posts
-    }
-  }, [session, router]);
+  // // Redirigir al usuario a la página de posts si está autenticado
+  // useEffect(() => {
+  //   if (session) {
+  //     router.push('/'); // Asegúrate de que esta ruta sea la correcta para mostrar los posts
+  //   }
+  // }, [session, router]);
 
   // Renderiza el componente
   return (
