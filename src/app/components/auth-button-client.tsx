@@ -36,11 +36,9 @@ export function AuthButton({ session }: { session: Session | null }) {
     }
   }, [session, router]);
 
-  // Renderiza el componente
   return (
     <header className="flex flex-col items-center">
       {
-        // Si no hay sesión, muestra los botones de iniciar sesión
         !session ? (
           <div className="flex flex-col gap-4">
             <button
@@ -59,7 +57,6 @@ export function AuthButton({ session }: { session: Session | null }) {
             </button>
           </div>
         ) : (
-          // Si hay sesión, muestra el botón de cerrar sesión
           <button
             onClick={handleSignOut}
             className="bg-gray-800 text-white px-4 py-2 rounded"
