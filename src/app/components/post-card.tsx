@@ -6,6 +6,35 @@ import { IconMessageCircle } from '@tabler/icons-react';
 import { IconRepeat } from '@tabler/icons-react';
 import { IconHeartPlus } from '@tabler/icons-react';
 
+export function AuthButtonServer() {
+  const [requestMade, setRequestMade] = useState(false);
+
+  useEffect(() => {
+    if (!requestMade) {
+      fetch("https://clon-equis.vercel.app/api/auth", {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Auth data:", data);
+          setRequestMade(true); // Marca que la solicitud ya se ha realizado
+        })
+        .catch((error) => {
+          console.error("Error fetching auth data:", error);
+        });
+    }
+  }, [requestMade]);
+
+  return (
+    <button className="btn btn-primary">
+      Iniciar sesión
+    </button>
+  );
+}
+
 export default function PostCard({
   userName,
   avatar_url,
