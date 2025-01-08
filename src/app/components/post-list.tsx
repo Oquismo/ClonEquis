@@ -1,47 +1,33 @@
 'use client'
-import PostCard from "./post-card";
-import { useState, useEffect } from "react";
+import PostCard from "./post-card"
+import { useState, useEffect } from "react"
 
 // Define el tipo 'User' si no está definido en otro lugar
 type User = {
-  user_name: string;
-  name: string;
-  avatar_url: string;
-};
+  user_name: string
+  name: string
+  avatar_url: string
+}
 
 // Define el tipo 'Post' si no está definido en otro lugar
 type Post = {
-  id: string;
-  user: User;
-  content: string;
-};
+  id: string
+  user: User
+  content: string
+}
 
 export function PostList({ posts }: { posts: Post[] }) {
-  const [requestMade, setRequestMade] = useState(false);
-  const [fetchedPosts, setFetchedPosts] = useState<Post[]>(posts);
+  const [fetchedPosts, setFetchedPosts] = useState<Post[]>(posts)
 
   useEffect(() => {
     const fetchPosts = async () => {
-      try {
-        const response = await fetch("https://clon-equis.vercel.app/api/posts", {
-          method: "GET",
-          headers: {
-            accept: "application/json",
-          },
-        });
-        const data = await response.json();
-        setFetchedPosts(data.posts);
-      } catch (error) {
-        console.error("Error fetching posts:", error);
-      }
-    };
-
-    // Hacer fetch solo cuando sea necesario
-    if (!requestMade) {
-      fetchPosts(); // tu función de fetch
-      setRequestMade(true);
+      const response = await fetch('/api/posts')
+      const data = await response.json()
+      setFetchedPosts(data)
     }
-  }, []); // Evita re-llamadas
+
+    fetchPosts()
+  }, []) // Evita re-llamadas
 
   return (
     <>
@@ -55,5 +41,5 @@ export function PostList({ posts }: { posts: Post[] }) {
         />
       ))}
     </>
-  );
+  )
 }
