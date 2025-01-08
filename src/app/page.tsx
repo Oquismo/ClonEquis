@@ -2,7 +2,7 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { AuthButtonServer } from "@/app/components/auth-button-server";
 import { redirect } from "next/navigation";
-import { PostList } from "./components/post-list";
+// import { PostList } from "./components/post-list";
 import { ComposePost } from "./components/compose-post";
 
 
@@ -25,7 +25,7 @@ export default async function Home() {
       <section className="max-w-[600px] mx-auto border-l border-r border-white/30 h-full min-h-screen">
         
         <ComposePost userAvatarUrl={session.user?.user_metadata?.avatar_url} />
-        <PostList posts={posts ?? []} />
+        {/* <PostList posts={posts ?? []} /> */}
         <AuthButtonServer />
       </section>
       
