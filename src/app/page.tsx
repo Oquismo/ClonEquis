@@ -16,21 +16,42 @@ export default async function Home() {
     redirect("/login");
   }
 
-  const { data: posts } = await supabase
-  .from("posts")
-  .select("*, user:users(name, avatar_url, user_name)");
+  const { data: posts, error } = await supabase
+    .from('posts')
+    .select('*, user:users(name, avatar_url, user_name)')
+    .order('created_at', { ascending: false })
+
+  if (error) {
+    console.error(error)
+    return <div>Error al cargar los posts</div>
+  }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between ">
-      <section className="max-w-[600px] mx-auto border-l border-r border-white/30 h-full min-h-screen">
+
+
+    <main className="flex min-h-screen flex-col items-center justify-between">
+    <section className="max-w-[600px] w-full mx-auto border-l border-r border-white/20 min-h-screen">
+      <ComposePost userAvatarUrl={session.user?.user_metadata?.avatar_url} />
+      <PostList posts={posts ?? []} />
+    </section>
+    <AuthButtonServer />
+  </main>
+
+
+
+
+
+
+    // <main className="flex min-h-screen flex-col items-center justify-between ">
+    //   <section className="max-w-[600px] mx-auto border-l border-r border-white/30 h-full min-h-screen">
         
-        <ComposePost userAvatarUrl={session.user?.user_metadata?.avatar_url} />
-        <PostList posts={posts ?? []} /> 
-        <AuthButtonServer />
-      </section>
+    //     <ComposePost userAvatarUrl={session.user?.user_metadata?.avatar_url} />
+    //     <PostList posts={posts ?? []} />
+    //     <AuthButtonServer />
+    //   </section>
       
-      <main className="mt-4 items-center justify-between">
-      </main>
-    </main>
+    //   <main className="mt-4 items-center justify-between">
+    //   </main>
+    // </main>
   );
 }
