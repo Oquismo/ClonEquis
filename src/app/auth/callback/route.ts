@@ -17,5 +17,9 @@ export async function GET(request: NextRequest) {
     }
   }
 
-  return NextResponse.redirect(requestUrl.origin + '/login'); // Redirige al usuario a la página de inicio de sesión
+  return NextResponse.redirect(requestUrl.origin + '/login', {
+    headers: {
+      'Cache-Control': 'public, max-age=3600', // Cache por 1 hora
+    },
+  }); // Redirige al usuario a la página de inicio de sesión
 }
