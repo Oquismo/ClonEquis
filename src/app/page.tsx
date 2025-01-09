@@ -1,28 +1,28 @@
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
-import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
-import {ComposePost} from './components/compose-post';
-import {PostList} from './components/post-list';
-import {AuthButtonServer} from './components/auth-button-server';
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
+import {ComposePost} from './components/compose-post'
+import { PostList } from './components/post-list'
+import {AuthButtonServer} from './components/auth-button-server'
 
 export default async function Home() {
-  const supabase = createServerComponentClient({ cookies });
+  const supabase = createServerComponentClient({ cookies })
   const {
     data: { session },
-  } = await supabase.auth.getSession();
+  } = await supabase.auth.getSession()
 
   if (session === null) {
-    redirect("/login");
+    redirect("/login")
   }
 
   const { data: posts, error } = await supabase
     .from('posts')
     .select('*, user:users(name, avatar_url, user_name)')
-    .order('created_at', { ascending: false });
+    .order('created_at', { ascending: false })
 
   if (error) {
-    console.error(error);
-    return <div>Error al cargar los posts</div>;
+    console.error(error)
+    return <div>Error al cargar los posts</div>
   }
 
   return (
@@ -33,5 +33,5 @@ export default async function Home() {
       </section>
       <AuthButtonServer />
     </main>
-  );
+  )
 }
