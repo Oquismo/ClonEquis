@@ -1,6 +1,6 @@
 'use client'
 
-import { experimental_useFormStatus as useFormStatus } from "react-dom"
+import { useFormStatus } from 'react-dom'
 import { useRef, useEffect, } from "react"
 
 export function ComposePostTextarea(){
@@ -15,14 +15,12 @@ export function ComposePostTextarea(){
         if (!pending && alreadySent.current ){
 
             alreadySent.current = false
+
             textareaRef.current.value = ''
+
             return
-
-
         }
-
             alreadySent.current = pending
-
 
     }, [pending])
 
