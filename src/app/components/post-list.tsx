@@ -1,6 +1,6 @@
 'use client'
-import { useState } from 'react';
-import PostCard from './post-card';
+import { useState, useEffect } from 'react';
+import { Post } from './post';
 
 interface Post {
     id: string;
@@ -26,13 +26,11 @@ export function PostList({ posts }: PostListProps) {
     return (
         <>
             {fetchedPosts.map(post => (
-                <PostCard
+                <Post
                     key={post.id}
                     id={post.id}
-                    userName={post.user.user_name}
-                    userFullName={post.user.name}
-                    avatar_url={post.user.avatar_url}
                     content={post.content}
+                    userAvatarUrl={post.user.avatar_url}
                     onDelete={handlePostDelete}
                 />
             ))}

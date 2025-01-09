@@ -2,20 +2,20 @@ import { deletePost } from '../../actions/delete-post-action'
 import { useState } from 'react'
 
 interface PostProps {
-    postId: string
+    id: string
     content: string
     userAvatarUrl: string
-    onDelete: (postId: string) => void
+    onDelete: (id: string) => void
 }
 
-export function Post({ postId, content, userAvatarUrl, onDelete }: PostProps) {
+export function Post({ id, content, userAvatarUrl, onDelete }: PostProps) {
     const [isDeleting, setIsDeleting] = useState(false)
 
     const handleDelete = async () => {
         setIsDeleting(true)
         try {
-            await deletePost(postId)
-            onDelete(postId)
+            await deletePost(id)
+            onDelete(id)
         } catch (error) {
             console.error('Error al eliminar el post:', error)
         } finally {
