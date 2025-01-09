@@ -33,8 +33,9 @@
 
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
+import { revalidatePath } from "next/cache";
 
-// import { revalidatePath } from "next/cache";
+
 export function ComposePost ({
     
     userAvatarUrl
@@ -55,7 +56,10 @@ export function ComposePost ({
         if (user === null) return
         await supabase.from ('posts').insert({content, user_id: user.id})
 
-        console.log('hola puta')
+
+        revalidatePath('/')
+
+        
     }
     return(
         <form action={addPost} className=" flex flex-1 flex-col gap-y-4">
