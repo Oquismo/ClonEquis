@@ -1,79 +1,61 @@
 'use client'
 
-import { ComposePostButton } from './compose-post-button'
+import { useState } from 'react'
 import { addPost } from '../../actions/add-post-action'
-import { useRef } from 'react'
 
-
-
-
-// import { revalidatePath } from "next/cache";
 export function ComposePost ({
-    
-    userAvatarUrl
+    userAvatarUrl,
+    onPostCreated
 }: {
-    
     userAvatarUrl: string;
+    onPostCreated: (newPost: any) => void;
 }){
+    const [pending, setPending] = useState(false)
+    const [error, setError] = useState<string | null>(null)
 
-    const formRef = useRef<HTMLFormElement>(null)
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+        setPending(true)
+        setError(null)
 
+        const formData = new FormData(event.currentTarget)
+        const content = formData.get('content')
 
+        if (content === null || content === '') {
+            setPending(false)
+            setError('El contenido no puede estar vacío')
+            return
+        }
 
-
-    // const addPost = async (formData: FormData) => {
-    //     'use server'
-    //     const content = formData.get('content') 
-
-    //     if (content === null) return
-
-    //     const supabase = createServerActionClient ({cookies})
-
-    //     const { data: {user} } = await supabase.auth.getUser()
-
-    //     if (user === null) return
-
-    //     await supabase.from('posts').insert({content, user_id: user.id})
-           
-        
-
-    // }
+        try {
+            await addPost(formData)
+            onPostCreated(formData)
+        } catch (err) {
+            setError('Error al crear el post')
+        } finally {
+            setPending(false)
+        }
+    }
 
     return (
-        <form ref={formRef} action={async (formData) => {
-          await addPost(formData)
-          formRef.current?.reset()
-        }} className='flex flex-row p-3 border-b border-white/20'>
-          <img className='rounded-full w-10 h-10 object-contain mr-4' src={userAvatarUrl} />
-          <div className='flex flex-1 flex-col gap-y-4'>
-          <textarea
-            name='content'
-            rows={4}
-            className='w-full text-xl bg-black placeholder-gray-500 p-2'
-            placeholder='¡¿Qué está pasando!?'
-          ></textarea>
-            <ComposePostButton />
-          </div>
+        <form onSubmit={handleSubmit} className="flex flex-1 flex-col gap-y-4">
+            {error && <div className="error">{error}</div>}
+            <img className="rounded-full w-12 h-12 object-contain" src={userAvatarUrl} />
+            <div className="flex flex-1 flex-col gap-y-4">
+                <textarea
+                    name='content'
+                    rows={4}
+                    className="w-full text-2xl bg-black placeholder-gray-500"
+                    placeholder="Que dices primo"
+                ></textarea>
+                <button
+                    disabled={pending}
+                    type='submit'
+                    className='bg-sky-500 text-sm disabled:opacity-40 disabled:pointer-events-none font-bold rounded-full px-5 py-2 self-end'
+                >
+                    {pending ? 'Posteando...' : 'Postear'}
+                </button>
+            </div>
         </form>
-      )
-    }
-    
-//     return(
-//         <form action={addPost} className=" flex flex-1 flex-col gap-y-4">
-//               <img className="rounded-full w-12 h-12 object-contain" src={userAvatarUrl} />
-//             <div className="flex flex-1 flex-col gap-y-4">
-
-//             <textarea
-//             name='content'
-//             rows={4}
-//             className="w-full textt-2xl bg-black placeholder-gray-500"
-//             placeholder="Que dices primo"
-//             ></textarea>
-//             <button type="submit" className="bg-sky-300 font-bold rounded-full px-5 py-2 self-end"
-//             >Publicar tuit
-//             </button>
-//             </div>
-//         </form>
-//     )
-
-// }
+    )
+}
