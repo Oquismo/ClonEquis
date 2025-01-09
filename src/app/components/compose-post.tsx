@@ -45,15 +45,25 @@ export function ComposePost ({
     const addPost = async (formData: FormData) => {
         'use server'
 
+        const content = formData.get('content')
+
+        if (content === null) return
+
+        const supabase = createServerActionClient({ cookies })
+
+        const { data: { user } } = await supabase.auth.getUser()
+        if (user === null) return
+        await supabase.from ('posts').insert({content, user_id: user.id})
+
         console.log('hola puta')
     }
     return(
-        <form className=" flex flex-1 flex-col gap-y-4">
+        <form action={addPost} className=" flex flex-1 flex-col gap-y-4">
               <img className="rounded-full w-6 h-6 object-contain" src={userAvatarUrl} />
             <div className="flex flex-1 flex-col gap-y-4">
 
             <textarea
-            name='post'
+            name='content'
             rows={4}
             className="w-full textt-2xl bg-black placeholder-gray-500"
             placeholder="Que dices primo"
