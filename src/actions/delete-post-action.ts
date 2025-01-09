@@ -1,6 +1,5 @@
-export async function deletePost(postId: string): Promise<void> {
-    // Aquí deberías implementar la lógica para eliminar el post, por ejemplo, haciendo una petición a tu API
-    const response = await fetch(`/api/posts/${postId}`, {
+export async function deletePost(id: string): Promise<void> {
+    const response = await fetch(`/api/posts/${id}`, {
         method: 'DELETE',
     });
 

@@ -1,6 +1,6 @@
 'use client'
-import PostCard from "./post-card";
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
+import PostCard from './post-card';
 
 // Define el tipo 'User' si no está definido en otro lugar
 type User = {
@@ -16,25 +16,24 @@ type Post = {
   content: string;
 };
 
-export function PostList({ posts }: { posts: Post[] }) {
+export function PostList() {
+  const [fetchedPosts, setFetchedPosts] = useState<Post[]>([]);
   const [requestMade, setRequestMade] = useState(false);
-  const [fetchedPosts, setFetchedPosts] = useState<Post[]>(posts);
 
   useEffect(() => {
     if (!requestMade) {
       const fetchPosts = async () => {
         try {
-          const response = await fetch("https://clon-equis.vercel.app/api/posts", {
-            method: "GET",
+          const response = await fetch('/api/posts', {
             headers: {
-              accept: "application/json",
+              accept: 'application/json',
             },
           });
           const data = await response.json();
           setFetchedPosts(data.posts);
           setRequestMade(true); // Marca que la solicitud ya se ha realizado
         } catch (error) {
-          console.error("Error fetching posts:", error);
+          console.error('Error fetching posts:', error);
         }
       };
 
@@ -42,16 +41,16 @@ export function PostList({ posts }: { posts: Post[] }) {
     }
   }, [requestMade]);
 
-  const handlePostDelete = (postId: string) => {
-    setFetchedPosts(fetchedPosts.filter(post => post.id !== postId))
-  }
+  const handlePostDelete = (id: string) => {
+    setFetchedPosts(fetchedPosts.filter(post => post.id !== id));
+  };
 
   return (
     <>
-      {fetchedPosts.map((post) => (
+      {fetchedPosts.map(post => (
         <PostCard
           key={post.id}
-          postId={post.id}
+          id={post.id}
           userName={post.user.user_name}
           userFullName={post.user.name}
           avatar_url={post.user.avatar_url}

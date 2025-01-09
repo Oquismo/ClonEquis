@@ -8,23 +8,23 @@ import { IconHeartPlus } from '@tabler/icons-react';
 import { deletePost } from '../../actions/delete-post-action'
 
 interface PostCardProps {
-    postId: string
-    userName: string
-    userFullName: string
-    avatar_url: string
-    content: string
-    onDelete: (postId: string) => void
+    id: string;
+    userName: string;
+    userFullName: string;
+    avatar_url: string;
+    content: string;
+    onDelete: (id: string) => void;
 }
 
-export default function PostCard({ postId, userName, userFullName, avatar_url, content, onDelete }: PostCardProps) {
+export default function PostCard({ id, userName, userFullName, avatar_url, content, onDelete }: PostCardProps) {
   const [isFollowed, setIsFollowed] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false)
 
   const handleDelete = async () => {
     setIsDeleting(true)
     try {
-        await deletePost(postId)
-        onDelete(postId)
+        await deletePost(id)
+        onDelete(id)
     } catch (error) {
         console.error('Error al eliminar el post:', error)
     } finally {
