@@ -5,21 +5,32 @@ import Link from "next/link";
 import { IconMessageCircle } from '@tabler/icons-react';
 import { IconRepeat } from '@tabler/icons-react';
 import { IconHeartPlus } from '@tabler/icons-react';
+import { deletePost } from '../../actions/delete-post-action'
 
+interface PostCardProps {
+    postId: string
+    userName: string
+    userFullName: string
+    avatar_url: string
+    content: string
+    onDelete: (postId: string) => void
+}
 
-export default function PostCard({
-    userName,
-    avatar_url,
-    userFullName,
-    content
-}:{
-    userFullName: string;
-    avatar_url: string;
-    userName: string;
-    content : string;
-
-}) {
+export default function PostCard({ postId, userName, userFullName, avatar_url, content, onDelete }: PostCardProps) {
   const [isFollowed, setIsFollowed] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false)
+
+  const handleDelete = async () => {
+    setIsDeleting(true)
+    try {
+        await deletePost(postId)
+        onDelete(postId)
+    } catch (error) {
+        console.error('Error al eliminar el post:', error)
+    } finally {
+        setIsDeleting(false)
+    }
+  }
 
   return (
     <Card className=" swadow-none bg-transparent hover:bg-slate-800
@@ -63,9 +74,11 @@ export default function PostCard({
       <button>
       <IconHeartPlus className="w-4 h-4"/>
       </button>
+      <button onClick={handleDelete} disabled={isDeleting}>
+        {isDeleting ? 'Eliminando...' : 'Eliminar'}
+      </button>
         
       </CardFooter>
     </Card>
   );
 }
-

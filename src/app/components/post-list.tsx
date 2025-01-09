@@ -42,15 +42,21 @@ export function PostList({ posts }: { posts: Post[] }) {
     }
   }, [requestMade]);
 
+  const handlePostDelete = (postId: string) => {
+    setFetchedPosts(fetchedPosts.filter(post => post.id !== postId))
+  }
+
   return (
     <>
       {fetchedPosts.map((post) => (
         <PostCard
           key={post.id}
+          postId={post.id}
           userName={post.user.user_name}
           userFullName={post.user.name}
           avatar_url={post.user.avatar_url}
           content={post.content}
+          onDelete={handlePostDelete}
         />
       ))}
     </>
