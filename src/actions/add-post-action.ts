@@ -10,11 +10,16 @@ export const addPost = async (formData: FormData) => {
   if (content === null) return
 
   const supabase = createServerActionClient({ cookies })
-  // revisar si el usuario realmene está autentificado
+  // revisar si el usuario realmente está autentificado
   const { data: { user } } = await supabase.auth.getUser()
   if (user === null) return
 
-  await supabase.from('posts').insert({ content, user_id: user.id })
+  const { error } = await supabase.from('posts').insert({ content, user_id: user.id })
 
-  revalidatePath(`/?content=${content.toString()}`)
+  if (error) {
+    console.error('Error al insertar el post:', error)
+    return
+  }
+
+  revalidatePath('/')
 }
