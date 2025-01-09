@@ -1,7 +1,7 @@
 'use client'
 
 import { experimental_useFormStatus as useFormStatus } from "react-dom"
-import { useRef, useEffect, use } from "react"
+import { useRef, useEffect, } from "react"
 
 export function ComposePostTextarea(){
     const {pending} = useFormStatus()
