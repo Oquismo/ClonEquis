@@ -2,9 +2,9 @@
 import {Card, CardHeader, CardBody, CardFooter, Avatar, Button} from "@nextui-org/react";
 import {useState} from "react";
 import Link from "next/link";
-import { IconMessageCircle } from '@tabler/icons-react';
-import { IconRepeat } from '@tabler/icons-react';
-import { IconHeartPlus } from '@tabler/icons-react';
+// import { IconMessageCircle } from '@tabler/icons-react';
+// import { IconRepeat } from '@tabler/icons-react';
+// import { IconHeartPlus } from '@tabler/icons-react';
 import { deletePost } from '../../actions/delete-post-action'
 
 interface PostCardProps {
