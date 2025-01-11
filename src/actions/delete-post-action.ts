@@ -1,9 +1,12 @@
-export async function deletePost(id: string): Promise<void> {
-    const response = await fetch(`/api/posts/${id}`, {
-        method: 'DELETE',
-    });
+// src/actions/delete-post-action.ts
+import { createServerActionClient } from '@supabase/auth-helpers-nextjs';
+import { cookies } from 'next/headers';
 
-    if (!response.ok) {
-        throw new Error('Error al eliminar el post');
-    }
+export async function deletePost(id: string): Promise<void> {
+  const supabase = createServerActionClient({ cookies });
+  const { error } = await supabase.from('posts').delete().eq('id', id);
+
+  if (error) {
+    throw new Error('Error al eliminar el post');
+  }
 }

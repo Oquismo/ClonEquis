@@ -17,7 +17,6 @@ interface PostCardProps {
 }
 
 export default function PostCard({ id, userName, userFullName, avatar_url, content, onDelete }: PostCardProps) {
-    const [isFollowed, setIsFollowed] = useState(false)
     const [isDeleting, setIsDeleting] = useState(false)
 
     const handleDelete = async () => {
@@ -33,7 +32,7 @@ export default function PostCard({ id, userName, userFullName, avatar_url, conte
     }
 
     return (
-        <Card className=" swadow-none bg-transparent hover:bg-slate-800
+        <Card className="shadow-none bg-transparent hover:bg-slate-800
         transition
         border-b rounded-none cursor-pointer border-white/20">
             <CardHeader className="justify-between">
@@ -48,36 +47,20 @@ export default function PostCard({ id, userName, userFullName, avatar_url, conte
                     </div>
                 </div>
                 <Button
-                    className={isFollowed ? "bg-transparent text-foreground border-default-200" : ""}
+                    className={isDeleting ? "bg-transparent text-foreground border-default-200" : ""}
                     color="primary"
                     radius="full"
                     size="sm"
-                    variant={isFollowed ? "bordered" : "solid"}
-                    onPress={() => setIsFollowed(!isFollowed)}
+                    variant={isDeleting ? "bordered" : "solid"}
+                    onPress={handleDelete}
+                    disabled={isDeleting}
                 >
-                    {isFollowed ? "Unfollow" : "Follow"}
+                    {isDeleting ? "Eliminando..." : "Eliminar"}
                 </Button>
             </CardHeader>
             <CardBody className="px-3 py-0 text-small text-white">
                 <p>{content}</p>
-                <span className="pt-2">
-
-                </span>
             </CardBody>
-            <CardFooter className="gap-3">
-                <button>
-                    <IconMessageCircle className="w-4 h-4" />
-                </button>
-                <button>
-                    <IconRepeat className="w-4 h-4" />
-                </button>
-                <button>
-                    <IconHeartPlus className="w-4 h-4" />
-                </button>
-                <button onClick={handleDelete} disabled={isDeleting}>
-                    {isDeleting ? 'Eliminando...' : 'Eliminar'}
-                </button>
-            </CardFooter>
         </Card>
     );
 }
