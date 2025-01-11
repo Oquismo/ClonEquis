@@ -129,7 +129,7 @@ export default function PostCard({ id, userName, userFullName, avatar_url, conte
                         <h5 className="text-small tracking-tight text-default-400">@{userName}</h5>
                     </div>
                 </div>
-                <Button
+                {/* <Button
                     className={isFollowed ? "bg-transparent text-foreground border-default-200" : ""}
                     color="primary"
                     radius="full"
@@ -138,7 +138,7 @@ export default function PostCard({ id, userName, userFullName, avatar_url, conte
                     onPress={() => setIsFollowed(!isFollowed)}
                 >
                     {isFollowed ? "Unfollow" : "Follow"}
-                </Button>
+                </Button> */}
                 <Button
                     className={isDeleting ? "bg-transparent text-foreground border-default-200" : ""}
                     color="primary"
