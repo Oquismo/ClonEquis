@@ -8,3 +8,17 @@ if (!supabaseUrl || !supabaseKey) {
 }
 
 export const supabase = createClient(supabaseUrl, supabaseKey);
+
+// Function to insert a new user
+export async function insertUser(name: string, email: string) {
+  const { data, error } = await supabase
+    .from('users')
+    .insert([{ name, email }]);
+
+  if (error) {
+    console.error('Error inserting user:', error);
+    throw error;
+  }
+
+  return data;
+}
